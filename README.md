@@ -1,5 +1,5 @@
 # vmodem
-The Virtual Hayes Compatible Modem script for Raspberry Pi and Linux based systems
+The Virtual Modem script for Raspberry Pi and Linux based systems
 
 # --------------------------------
 # VMODEM - Virtual Modem bootstrap
