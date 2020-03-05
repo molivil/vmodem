@@ -6,6 +6,8 @@
 #
 # Licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 # https://creativecommons.org/licenses/by-nc-sa/4.0/
+#
+#
 # !!Requires socat and netcat to function!!
 #
 # run ser2telsvr.sh once to see pty# generated then adjust the ksnetcat.sh and vmodem.sh scripts accordingly.
