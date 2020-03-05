@@ -48,4 +48,4 @@ The Virtual Hayes Compatible Modem script for Raspberry Pi and Linux based syste
 
 # ::NOTE:: !!if you have a 8250 UART you must use speeds of 19200 baud or lower!!
 
-Tested on Ububtu and Debian based Linux but should work with some mods on other Unix based O/S
+Tested on Ubuntu and Debian based Linux but should work with some mods on other Unix based O/S
