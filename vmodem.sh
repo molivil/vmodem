@@ -35,7 +35,7 @@
 #
  
 # Script version
-vmodver=1.4.2
+vmodver=1.4.3
  
 # CONFIGURATION
 # -----------------------
@@ -106,6 +106,9 @@ sendtty () {
   echo -en "$1\n";
   echo -en "$1\x0d\x0a" >/dev/$serport
 }
+
+export -f sendtty
+export -f ttyinit
  
 # Open serial port for use. Allocate file descriptor
 # and treat the serial port as a file.
@@ -269,7 +272,7 @@ while [ "$continue" != "1" ]; do
     # LOGIN  -  FORK LOGIN SESSION
     if [[ $cmd == LOGIN ]]; then
       exec 99>&-
-      /sbin/getty -8 -L ttyAMA0 $baud vt100
+      /sbin/getty -8 -L $serport $baud $TERM
       ttyinit
       exec 99<>/dev/$serport
       sendtty; sendtty "READY."
