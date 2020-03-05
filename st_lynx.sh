@@ -8,9 +8,4 @@
 # https://creativecommons.org/licenses/by-nc-sa/4.0/
 #
 # export TERM=vt100 #legacy here for reference Lord_NT
-
-#telnet site
-telsite=towel.blinkenlights.nl
-telport=23
-
-telnet -8 $telsite $telport
+lynx http://www.google.com
