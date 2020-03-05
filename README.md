@@ -12,7 +12,9 @@ The Virtual Modem script for Raspberry Pi and Linux based systems
  Tested working out of box with the following host configurations:
 
  o Most Standard VT100 terminals and terminal emulations
+
  o HyperTerminal
+
  o PuTTY
 
  PPP connectivity will initialize correctly under the following configurations:
