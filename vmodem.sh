@@ -47,9 +47,9 @@
 
 # ::NOTE:: !!if you have a 8250 UART you must use speeds of 19200 baud or lower!!
 
-# Temperature script variables do not mess with please :) Lord_NT !!requires sed and awk!!
-degf=(`vcgencmd measure_temp | sed -e 's/temp=//g' | sed "s/['']C//g" | awk '{print $stdout * 1.8 + 32}'`)
-degc=(`vcgencmd measure_temp | sed -e "s/temp=//g" | sed "s/['']C//g"`)
+# Temperature script variables do not mess with please :) Lord_NT !!requires sed, awk and a raspberry pi !!
+#degf=(`vcgencmd measure_temp | sed -e 's/temp=//g' | sed "s/['']C//g" | awk '{print $stdout * 1.8 + 32}'`)
+#degc=(`vcgencmd measure_temp | sed -e "s/temp=//g" | sed "s/['']C//g"`)
 
 # Script version
 vmodver=1.4.2b_NT
@@ -316,6 +316,15 @@ while [ "$continue" != "1" ]; do
     if [[ $cmd == LYNX ]]; then
       exec 99>&-
       /sbin/getty -8 -L $serport $baud $term -n -l "st_lynx.sh"
+      ttyinit
+      exec 99<>/dev/$serport
+      sendtty; sendtty "READY."
+    fi
+
+    # TELNET  -  FORK TELNET SESSION (!!make sure you have telnet installed!!)
+    if [[ $cmd == TELNET ]]; then
+      exec 99>&-
+      /sbin/getty -8 -L $serport $baud $term -n -l "st_telnet.sh"
       ttyinit
       exec 99<>/dev/$serport
       sendtty; sendtty "READY."
