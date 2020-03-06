@@ -33,7 +33,7 @@ The Virtual Modem script for Raspberry Pi and Linux based systems
    - Generic
      - Standard 28800 bps Modem
      - Standard 33600 bps Modem <-- Win2k and UP use this modem
-     (::NOTE:: dial ATDT2 to disable fake login if needed Win2k-10)
+     (::NOTE:: dial ATDT2 to disable fake login if needed WinNT 3.51 - 10)
 
  o Serial Line Setup
    - Baud 57600 8,N,1 'No Flow Control'
