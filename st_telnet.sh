@@ -1,11 +1,8 @@
 #!/bin/bash
-#
 # --------------------------------
 # VMODEM - Virtual Modem bootstrap
 # --------------------------------
-# Oliver Molini 2020
-#
-# Billy Stoughton II for bug fixes and contributions
+# Oliver Molini 2020 Billy Stoughton II/Lord_NT 2020
 #
 # Licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 # https://creativecommons.org/licenses/by-nc-sa/4.0/
