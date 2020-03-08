@@ -322,7 +322,16 @@ while [ "$continue" != "1" ]; do
       exec 99<>/dev/$serport
       sendtty; sendtty "READY."
     fi
-    
+
+    # TELNET  -  FORK TELNET SESSION (!!make sure you have telnet installed!!)
+    if [[ $cmd == TELNET ]]; then
+      exec 99>&-
+      /sbin/getty -8 -L $serport $baud $term -n -l "st_telnet.sh"
+      ttyinit
+      exec 99<>/dev/$serport
+      sendtty; sendtty "READY."
+    fi
+
     # EXIT  -  EXIT SCRIPT
     if [ "$cmd" = "EXIT" ]; then sendtty "OK"; continue="1"; fi
   fi
