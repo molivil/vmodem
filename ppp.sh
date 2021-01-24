@@ -1,7 +1,7 @@
 #!/bin/bash
 # RUN PPPD DAEMON
 #
-# Oliver Molini 2019
+# Oliver Molini 2020
 # 
 # Billy Stoughton II for bug fixes and contributions
 #
@@ -14,10 +14,11 @@
 #
  
 # Variable: etherp
-# Specify the ethernet device to use to connect to your network.
-# 
-# Default:    etherp=eth0
-etherp=eth0
+# Override the ethernet device to use to connect to your network.
+# This is set in vmodem.sh, but can be overridden here.
+#
+# Default:    #etherp=eth0 (commented out)
+#etherp=eth0
  
 # Variable: lcpidle
 # Specifies the idle timeout period in seconds for lcp-echo-interval.
