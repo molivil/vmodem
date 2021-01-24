@@ -1,15 +1,4 @@
 #!/bin/bash
 #
-
-sendt "Hello World Demo Box!"
-echo "---------------------"
-echo
-echo "You have just successfully dialed this virtual box!"
-echo
-echo "Please enter your name: "
-read username
-echo
-echo "Hello, $username!"
-echo
-echo "Thank you for visiting! Bye!"
-sleep 2
+sendtty "Terminal type set to $TERM. Running Lynx ..."
+lynx
