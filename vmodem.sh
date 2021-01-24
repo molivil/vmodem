@@ -113,6 +113,9 @@ sendtty () {
   echo -en "$1\n";
   echo -en "$1\x0d\x0a" >/dev/$serport
 }
+
+export -f sendtty
+export -f ttyinit
  
 # Open serial port for use. Allocate file descriptor
 # and treat the serial port as a file.
