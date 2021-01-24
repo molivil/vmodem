@@ -268,7 +268,7 @@ while [ "$continue" != "1" ]; do
       sendtty "ATDT1...Open PPPD connection"
       sendtty "ATZ.....Reset modem settings"
       sendtty "HELP....Display command reference"
-      sendtty "IPADDR..Display my IP address"
+      sendtty "IPADDR..Display my current IP address"
       sendtty "LOGIN...Fork a new linux login on serial"
       sendtty "EXIT....End this script"
       sendtty
