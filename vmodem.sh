@@ -3,7 +3,7 @@
 # --------------------------------
 # VMODEM - Virtual Modem bootstrap
 # --------------------------------
-# Oliver Molini 2020
+# Oliver Molini 2021
 #
 # Billy Stoughton II for bug fixes and contributions
 #
@@ -35,7 +35,7 @@
 #
  
 # Script version
-vmodver=1.4.3
+vmodver=1.5.0
  
 # CONFIGURATION
 # -----------------------
@@ -60,6 +60,12 @@ serport=ttyUSB0
 #baud=9600
 #baud=38400
 baud=57600
+ 
+# Variable: etherp
+# Sets the name of the ethernet device for PPP connections.
+# Usually eth0 for wired and wlan0 for wireless.
+#
+etherp=eth0
  
 # Variable: echoser
 # echoser sets the default behaviour of echoing serial
@@ -87,6 +93,7 @@ TERM="vt100"
 # -----------------
 export serport
 export baud
+export etherp
 export TERM
  
 # FUNCTIONS
@@ -106,9 +113,6 @@ sendtty () {
   echo -en "$1\n";
   echo -en "$1\x0d\x0a" >/dev/$serport
 }
-
-export -f sendtty
-export -f ttyinit
  
 # Open serial port for use. Allocate file descriptor
 # and treat the serial port as a file.
