@@ -1,7 +1,7 @@
 #!/bin/bash
 # RUN PPPD DAEMON
 #
-# Oliver Molini 2020
+# Oliver Molini 2021
 # 
 # Billy Stoughton II for bug fixes and contributions
 #
