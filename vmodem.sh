@@ -35,7 +35,7 @@
 #
  
 # Script version
-vmodver=1.5.2
+vmodver=1.5.3
  
 # CONFIGURATION
 # -----------------------
@@ -113,7 +113,7 @@ sendtty () {
   echo -en "$1\n";
   echo -en "$1\x0d\x0a" >/dev/$serport
 }
-
+ 
 export -f sendtty
 export -f ttyinit
  
@@ -225,8 +225,15 @@ while [ "$continue" != "1" ]; do
           if [[ $resultverbose == 1 ]]; then sendtty "RINGING"; sleep 1; fi
           if [ -f "$number.sh" ]; then
             if [[ $resultverbose == 1 ]]; then sendtty "CONNECT $baud"; else sendtty "1"; fi
-            # Execute dialed script
+            # Execute dialed script!
+ 
+            # For compatibility, explicitly tell the terminal to default to CR/LF 
+            # when pressing enter, to avoid cases where the terminal just sends CR.
+            echo -en "\x1b[20h" > /dev/$serport
+ 
+            # Run script with getty
             /sbin/getty -8 -L $serport $baud $TERM -n -l "./$number.sh"
+ 
             # Reset serial settings
             ttyinit
             result=3
@@ -268,7 +275,6 @@ while [ "$continue" != "1" ]; do
       sendtty "ATDT1...Open PPPD connection"
       sendtty "ATZ.....Reset modem settings"
       sendtty "HELP....Display command reference"
-      sendtty "IPADDR..Display my current IP address"
       sendtty "LOGIN...Fork a new linux login on serial"
       sendtty "EXIT....End this script"
       sendtty
@@ -276,11 +282,7 @@ while [ "$continue" != "1" ]; do
       sendtty
       sendtty "READY."
     fi
-
-    if [[ $cmd = IPADDR ]]; then
-      sendtty "My current IP address is $(hostname -I)"
-    fi
-
+ 
     # LOGIN  -  FORK LOGIN SESSION
     if [[ $cmd == LOGIN ]]; then
       exec 99>&-
@@ -291,7 +293,7 @@ while [ "$continue" != "1" ]; do
     fi
  
     # EXIT  -  EXIT SCRIPT
-    if [ "$cmd" = "EXIT" ]; then sendtty "Exiting."; continue="1"; fi
+    if [ "$cmd" = "EXIT" ]; then sendtty "OK"; continue="1"; fi
   fi
   buffer=$buffer$char
 done
