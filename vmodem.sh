@@ -35,7 +35,7 @@
 #
  
 # Script version
-vmodver=1.5.0
+vmodver=1.5.2
  
 # CONFIGURATION
 # -----------------------
@@ -268,6 +268,7 @@ while [ "$continue" != "1" ]; do
       sendtty "ATDT1...Open PPPD connection"
       sendtty "ATZ.....Reset modem settings"
       sendtty "HELP....Display command reference"
+      sendtty "IPADDR..Display my IP address"
       sendtty "LOGIN...Fork a new linux login on serial"
       sendtty "EXIT....End this script"
       sendtty
@@ -275,7 +276,11 @@ while [ "$continue" != "1" ]; do
       sendtty
       sendtty "READY."
     fi
- 
+
+    if [[ $cmd = IPADDR ]]; then
+      sendtty "My current IP address is $(hostname -I)"
+    fi
+
     # LOGIN  -  FORK LOGIN SESSION
     if [[ $cmd == LOGIN ]]; then
       exec 99>&-
@@ -286,7 +291,7 @@ while [ "$continue" != "1" ]; do
     fi
  
     # EXIT  -  EXIT SCRIPT
-    if [ "$cmd" = "EXIT" ]; then sendtty "OK"; continue="1"; fi
+    if [ "$cmd" = "EXIT" ]; then sendtty "Exiting."; continue="1"; fi
   fi
   buffer=$buffer$char
 done
