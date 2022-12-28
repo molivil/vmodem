@@ -1,5 +1,8 @@
 # vmodem
-The Virtual Hayes Compatible Modem script for Linux
+The Virtual Hayes Compatible Modem script for Linux.
+
+This might be an outdated version of the script. 
+The most recent version can be obtained at: http://www.steptail.com/guides:virtual_modem:script !
 
 2021-01-24
 ----------
