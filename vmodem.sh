@@ -414,7 +414,7 @@ while [ "$continue" != "1" ]; do
 
       # ATD Dial number
       if [[ ! -z "$number" ]]; then
-        if [[ $resultverbose == 1 && $ringing == 1 ]]; then sendtty "RINGING\n"; else sendtty "1\n"; fi
+        if [[ $resultverbose == 1 && $ringing == 1 ]]; then sendtty "RINGING\n"; fi
         sleep 2
         if [ -f "$number.sh" ]; then
           if [[ $resultverbose == 1 ]]; then sendtty "CONNECT $baud\n"; else sendtty "1\n"; fi
