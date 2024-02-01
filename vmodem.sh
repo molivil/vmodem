@@ -249,7 +249,7 @@ dohayes () {
   # We must also disable RINGING command, Windows 3.11 do not support it and it will hang the connection.
   # This is used in Windows 3.11 Internet Explorer dialup connection. (It is not used by Trumpet! Trumpet use ATDT1)
   if [[ $hcmd == 'X' ]]; then
-    if [[ $hparm =~ ATX[0-9]DT ]]; then
+    if [[ $cmd =~ ATX[0-9]DT ]]; then
       number=$(echo "$cmd" | grep -oP 'DT\s*\K[0-9]+')
       ringing=0
       result=0
