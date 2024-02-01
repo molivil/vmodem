@@ -260,7 +260,7 @@ dohayes () {
       if [[ $hparm == '2' ]]; then resultverbose=0; result=0; fi
       if [[ $hparm == '3' ]]; then resultverbose=0; result=0; fi
       if [[ $hparm == '4' ]]; then resultverbose=0; result=0; fi
-	fi
+    fi
   fi
   
   # ATZ Reset modem
@@ -414,7 +414,7 @@ while [ "$continue" != "1" ]; do
 
       # ATD Dial number
       if [[ ! -z "$number" ]]; then
-        if [[ $resultverbose == 1 && $ringing == 1 ]]; then sendtty "RINGING\n"; fi
+        if [[ $resultverbose == 1 && $ringing == 1 ]]; then sendtty "RINGING\n"; else sendtty "1\n"; fi
         sleep 2
         if [ -f "$number.sh" ]; then
           if [[ $resultverbose == 1 ]]; then sendtty "CONNECT $baud\n"; else sendtty "1\n"; fi
