@@ -44,7 +44,7 @@
 #
 
 # Script version
-vmodver=1.7.2 
+vmodver=1.7.3
 
 # CONFIGURATION
 # -----------------------
@@ -180,12 +180,20 @@ dohayes () {
   # ATD Dial a number
   if [[ $hcmd == 'D' ]]; then
     if [[ ! -z "$hparm" ]]; then
-  	  # Ignore if it is ATX4DT
-      if [[ $hparm != 'T' ]]; then
-      	number=$(echo $hparm |tr -dc '0-9')
-      	ringing=1
-      	result=0
+      number=$(echo $hparm |tr -dc '0-9')
+      
+      # If it's zero then maybe it's ATX4DT   1
+      # ATX4DT   1 will dial 1.
+      # We must also disable RINGING command, Windows 3.11 do not support it and it will hang the connection.
+      # This is used in Windows 3.11 Internet Explorer dialup connection. (It is not used by Trumpet! Trumpet use ATDT1)
+      if [[ -z "$number" ]]; then
+        number=$(echo "$cmd" | grep -oP 'DT\s*\K[0-9]+')
+        resultverbose=1
+        ringing=0
+      else
+        ringing=1
       fi
+      result=0
     fi
   fi
 
@@ -244,25 +252,15 @@ dohayes () {
   # - X2 Add dial tone detection (preventing blind dial, and sometimes preventing ATO)
   # - X3 Add busy signal detection
   # - X4 Add both busy signal and dial tone detection
-  # ATX4DT <Phone number>
-  # ATX4DT   1 will dial 1.
-  # We must also disable RINGING command, Windows 3.11 do not support it and it will hang the connection.
-  # This is used in Windows 3.11 Internet Explorer dialup connection. (It is not used by Trumpet! Trumpet use ATDT1)
   if [[ $hcmd == 'X' ]]; then
-    if [[ $cmd =~ ATX[0-9]DT ]]; then
-      number=$(echo "$cmd" | grep -oP 'DT\s*\K[0-9]+')
-      ringing=0
-      result=0
-    else
-      if [[ $hparm == '' ]]; then resultverbose=1; result=0; fi
-      if [[ $hparm == '0' ]]; then resultverbose=1; result=0; fi
-      if [[ $hparm == '1' ]]; then resultverbose=0; result=0; fi
-      if [[ $hparm == '2' ]]; then resultverbose=0; result=0; fi
-      if [[ $hparm == '3' ]]; then resultverbose=0; result=0; fi
-      if [[ $hparm == '4' ]]; then resultverbose=0; result=0; fi
-    fi
+    if [[ $hparm == '' ]]; then resultverbose=1; result=0; fi
+    if [[ $hparm == '0' ]]; then resultverbose=1; result=0; fi
+    if [[ $hparm == '1' ]]; then resultverbose=0; result=0; fi
+    if [[ $hparm == '2' ]]; then resultverbose=0; result=0; fi
+    if [[ $hparm == '3' ]]; then resultverbose=0; result=0; fi
+    if [[ $hparm == '4' ]]; then resultverbose=0; result=0; fi
   fi
-  
+
   # ATZ Reset modem
   # - Zn  Restore stored profile n
   if [[ $hcmd == 'Z' ]]; then echoser=1; resultverbose=1; carrierdetect=0; result=0; fi
