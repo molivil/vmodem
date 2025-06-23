@@ -47,8 +47,8 @@ sysctl -q net.ipv4.ip_forward=1
  
 # Share eth0 over ppp0
 iptables -t nat -A POSTROUTING -o $etherp -j MASQUERADE
-iptables -t filter -A FORWARD -i ppp0 -o $etherp -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -t filter -A FORWARD -i $etherp -o ppp0 -j ACCEPT
+iptables -A FORWARD -i $etherp -o ppp0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i ppp0 -o $etherp -j ACCEPT
  
 # Run PPP daemon and establish a link.
 pppd noauth nodetach local lock lcp-echo-interval $lcpidle lcp-echo-failure 3 proxyarp ms-dns 8.8.4.4 ms-dns 8.8.8.8 10.0.100.1:10.0.100.2 /dev/$serport $baud
