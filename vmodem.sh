@@ -180,14 +180,14 @@ dohayes () {
   # ATD Dial a number
   if [[ $hcmd == 'D' ]]; then
     if [[ ! -z "$hparm" ]]; then
-      number=$(echo $hparm |tr -dc '0-9')
+      number=$(echo "$cmd" | grep -oP 'D[A-Z]?\s*\K[0-9]+')
       
       # If it's zero then maybe it's ATX4DT   1
       # ATX4DT   1 will dial 1.
+      # ATX4D1   It can also be without space.
       # We must also disable RINGING command, Windows 3.11 do not support it and it will hang the connection.
       # This is used in Windows 3.11 Internet Explorer dialup connection. (It is not used by Trumpet! Trumpet use ATDT1)
       if [[ -z "$number" ]]; then
-        number=$(echo "$cmd" | grep -oP 'DT\s*\K[0-9]+')
         resultverbose=1
         ringing=0
       else
